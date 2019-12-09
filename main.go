@@ -14,8 +14,10 @@ func main() {
 	}
 	hobbies := readSpreadsheet.ReadSpreadsheet();
 
-	for hobby, emails := range hobbies{
-		hobbybuddy.CreateEvent(hobby, emails, srv)
+	for hobby, emails := range hobbies {
+		if len(emails) > 1 {
+			hobbybuddy.CreateEvent(hobby, emails, srv)
+		}
 	}
 
 }
