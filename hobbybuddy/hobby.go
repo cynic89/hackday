@@ -21,7 +21,7 @@ func CreateEvent(hobbyName string, attendees []string, srv *calendar.Service) {
 			DateTime: "2019-12-09T15:30:00-07:00",
 			TimeZone: "America/Los_Angeles",
 		},
-		Recurrence: []string{"RRULE:FREQ=DAILY;COUNT=5"},
+		Recurrence: []string{"RRULE:FREQ=WEEKLY;COUNT=1"},
 		Attendees:  getAttendeesList(attendees),
 	}
 

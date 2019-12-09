@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/cynic89/hackday/hobbybuddy"
+	"github.com/cynic89/hackday/readSpreadsheet"
 )
 
 func main() {
@@ -11,8 +12,10 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error when trying to login: %s", err.Error())
 	}
+	hobbies := readSpreadsheet.ReadSpreadsheet();
 
-	hobbybuddy.CreateEvent("Baking",
-		[]string{"ssankaran@pivotal.io", "rshenoy@pivotal.io", "neverma@pivotal.io", "sathavale@pivotal.io"}, srv)
+	for hobby, emails := range hobbies{
+		hobbybuddy.CreateEvent(hobby, emails, srv)
+	}
 
 }

@@ -37,7 +37,7 @@ func getClient(config *oauth2.Config) *http.Client {
 	// The file token.json stores the user's access and refresh tokens, and is
 	// created automatically when the authorization flow completes for the first
 	// time.
-	tokFile := "token.json"
+	tokFile := "token-spreadsheet.json"
 	tok, err := tokenFromFile(tokFile)
 	if err != nil {
 		tok = getTokenFromWeb(config)
@@ -125,7 +125,7 @@ func ReadSpreadsheet() map[string][]string {
 				continue
 			}
 			// Print columns A and E, which correspond to indices 0 and 4.
-			listOfHobbiesRaw := row[2].(string)
+			listOfHobbiesRaw := strings.ToLower(strings.Trim(row[2].(string), " "))
 			email := row[1].(string)
 			listOfHobbies := strings.Split(listOfHobbiesRaw, ",")
 			for i :=0; i < len(listOfHobbies);i++{
