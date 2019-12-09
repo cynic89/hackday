@@ -12,7 +12,7 @@ func main() {
 		fmt.Printf("Error when trying to login: %s", err.Error())
 	}
 
-	hobbybuddy.CreateEvent("Pool",
-		[]string{"ssankaran@pivotal.io", "rshenoy@pivotal.io", "neverma@pivotal.io"}, srv)
+	hobbybuddy.CreateEvent("Baking",
+		[]string{"ssankaran@pivotal.io", "rshenoy@pivotal.io", "neverma@pivotal.io", "sathavale@pivotal.io"}, srv)
 
 }
