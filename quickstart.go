@@ -77,7 +77,7 @@ func main() {
 	}
 
 	// If modifying these scopes, delete your previously saved token.json.
-	config, err := google.ConfigFromJSON(b, calendar.CalendarReadonlyScope)
+	config, err := google.ConfigFromJSON(b, calendar.CalendarScope)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)
 	}
@@ -88,6 +88,12 @@ func main() {
 		log.Fatalf("Unable to retrieve Calendar client: %v", err)
 	}
 
+	fmt.Println("Creating Event")
+	createEvent(srv)
+
+}
+
+func listEvents(srv *calendar.Service) {
 	t := time.Now().Format(time.RFC3339)
 	events, err := srv.Events.List("primary").ShowDeleted(false).
 		SingleEvents(true).TimeMin(t).MaxResults(10).OrderBy("startTime").Do()
@@ -106,4 +112,34 @@ func main() {
 			fmt.Printf("%v (%v)\n", item.Summary, date)
 		}
 	}
+}
+
+func createEvent(srv *calendar.Service) {
+	event := &calendar.Event{
+		Summary:     "Hobby Buddies",
+		Location:    "3495 Deer Creek Road, Palo Alto",
+		Description: "A chance to meet co-workers with similar interests",
+		Start: &calendar.EventDateTime{
+			DateTime: "2019-12-09T15:00:00-07:00",
+			TimeZone: "America/Los_Angeles",
+		},
+		End: &calendar.EventDateTime{
+			DateTime: "2019-12-09T15:00:00-07:00",
+			TimeZone: "America/Los_Angeles",
+		},
+		Recurrence: []string{"RRULE:FREQ=DAILY;COUNT=2"},
+		Attendees: []*calendar.EventAttendee{
+			&calendar.EventAttendee{Email: "shyam.s639@gmail.com"},
+			&calendar.EventAttendee{Email: "rumshenoy@gmail.com"},
+			&calendar.EventAttendee{Email: "sushrutsa@gmail.com"},
+		},
+	}
+
+	calendarId := "primary"
+	event, err := srv.Events.Insert(calendarId, event).Do()
+	if err != nil {
+		log.Fatalf("Unable to create event. %v\n", err)
+	}
+	fmt.Printf("Event created: %s\n", event.HtmlLink)
+
 }
