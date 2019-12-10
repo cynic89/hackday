@@ -1,8 +1,12 @@
 ---
 resources:
-- name: two-minutes
+- name: Tuesday-9am
   type: time
-  source: {interval: 5m}
+  source:
+    start: 9:00 AM
+    stop: 11:00 AM
+    interval: 1h
+    location: America/Los_Angeles
 
 - name: git-hackday
   type: git
@@ -13,7 +17,7 @@ resources:
 jobs:
 - name: notify
   plan:
-  - get: two-minutes
+  - get: Tuesday-9am
     trigger: true
   - get: git-hackday
   - task: run-hack-day
