@@ -14,11 +14,11 @@ func CreateEvent(hobbyName string, attendees []string, srv *calendar.Service) {
 		Location:    "3495 Deer Creek Road, Palo Alto",
 		Description: fmt.Sprintf("A chance to meet some your colleagues who like %s", hobbyName),
 		Start: &calendar.EventDateTime{
-			DateTime: "2019-12-09T15:00:00-07:00",
+			DateTime: "2019-12-10T15:00:00-07:00",
 			TimeZone: "America/Los_Angeles",
 		},
 		End: &calendar.EventDateTime{
-			DateTime: "2019-12-09T15:30:00-07:00",
+			DateTime: "2019-12-10T15:30:00-07:00",
 			TimeZone: "America/Los_Angeles",
 		},
 		Recurrence: []string{"RRULE:FREQ=WEEKLY;COUNT=1"},
