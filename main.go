@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+
 	"github.com/cynic89/hackday/hobbybuddy"
 	"github.com/cynic89/hackday/readSpreadsheet"
-	"math/rand"
 )
 
 func main() {
@@ -15,6 +16,7 @@ func main() {
 	}
 	hobbies := readSpreadsheet.ReadSpreadsheet()
 	randomize(hobbies)
+	fmt.Printf("%v \n", hobbies)
 
 	for hobby, emails := range hobbies {
 		if len(emails) > 1 {

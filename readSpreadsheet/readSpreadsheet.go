@@ -125,15 +125,16 @@ func ReadSpreadsheet() map[string][]string {
 				continue
 			}
 			// Print columns A and E, which correspond to indices 0 and 4.
-			listOfHobbiesRaw := strings.ToLower(strings.Trim(row[1].(string), " "))
+			listOfHobbiesRaw := strings.ToLower(row[1].(string))
 			email := row[0].(string)
 			listOfHobbies := strings.Split(listOfHobbiesRaw, ",")
 			for i := 0; i < len(listOfHobbies); i++ {
-				val, ok := hobbies[listOfHobbies[i]]
+				hobbyName := strings.TrimSpace(listOfHobbies[i])
+				val, ok := hobbies[hobbyName]
 				if ok {
-					hobbies[listOfHobbies[i]] = append(val, email)
+					hobbies[hobbyName] = append(val, email)
 				} else {
-					hobbies[listOfHobbies[i]] = []string{email}
+					hobbies[hobbyName] = []string{email}
 				}
 			}
 		}
