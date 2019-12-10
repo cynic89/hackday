@@ -8,4 +8,4 @@ image_resource:
     tag: latest
 
 run:
-  path: git-hackday/pipeline/task.sh
+  path: git-hackday/pipeline/notifier.sh
