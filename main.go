@@ -15,7 +15,7 @@ func main() {
 	}
 	hobbies := readSpreadsheet.ReadSpreadsheet()
 	randomize(hobbies)
-	
+
 	for hobby, emails := range hobbies {
 		if len(emails) > 1 {
 			hobbybuddy.CreateEvent(hobby, emails, srv)
@@ -25,7 +25,7 @@ func main() {
 }
 
 func randomize(hobbies map[string][]string) {
-	randUsers := hobbies["Random"]
+	randUsers := hobbies["random"]
 	for _, u := range randUsers {
 		randHobby := randHobby(u, hobbies)
 		if randHobby != "" {
@@ -33,7 +33,7 @@ func randomize(hobbies map[string][]string) {
 		}
 	}
 
-	delete(hobbies, "Random")
+	delete(hobbies, "random")
 }
 
 func randHobby(user string, hobbies map[string][]string) string {
@@ -52,6 +52,8 @@ func hobbiesNotPartOf(user string, hobbies map[string][]string) (possibleTargets
 			possibleTargets = append(possibleTargets, hobby)
 		}
 	}
+
+	return possibleTargets
 }
 
 func contains(user string, attendees []string) bool {
