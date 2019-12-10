@@ -1,0 +1,20 @@
+---
+resources:
+- name: two-minutes
+  type: time
+  source: {interval: 5m}
+
+- name: git-hackday
+  type: git
+  source:
+    uri: https://github.com/cynic89/hackday.git
+    branch: master
+
+jobs:
+- name: notify
+  plan:
+  - get: two-minutes
+    trigger: true
+  - get: git-hackday
+  - task: run-hack-day
+    file: git-hackday/pipeline/notifier.yml
